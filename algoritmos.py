@@ -21,11 +21,37 @@ def aire(bares_iniciales=0, bares_finales=0, porcentaje_inicial_o2=21, porcentaj
 
 
 def pp(bares_iniciales=0, bares_finales=0, porcentaje_inicial_o2=21, porcentaje_final_o2=21, porcentaje_inicial_he=0, porcentaje_final_he=0):
-    
+    bares_nuevos = bares_finales - bares_iniciales # Cuantos bares tengo que llenar?
+
+    # Helio
+    bares_he_originales = bares_iniciales * porcentaje_inicial_he / 100 # Calculo los bares que tenia
+    bares_he_finales = bares_finales * porcentaje_final_he / 100 # Calculo los bares al final de la mezcla
+    bares_he = bares_he_finales - bares_he_originales
+
+    # Nitrogeno
+    porcentaje_inicial_n = 100 - porcentaje_inicial_o2 - porcentaje_inicial_he
+    porcentaje_final_n = 100 - porcentaje_final_o2 - porcentaje_final_he
+    bares_n_originales = bares_iniciales * porcentaje_inicial_n / 100
+    bares_n_finales = bares_finales * porcentaje_final_n / 100
+    bares_n = bares_n_finales - bares_n_originales
+
+    #Aire
+    bares_aire = bares_n / 0.79
+
+    # Oxigeno
+    bares_o2 = bares_nuevos - bares_he - bares_aire
+
+    resultado = {
+        'porcentaje_o2': porcentaje_final_o2,
+        'porcentaje_he': porcentaje_final_he,
+        'bares_aire': bares_aire,
+        'bares_o2': bares_o2,
+        'bares_he': bares_he,
+    }
+    return resultado
 
 
-
-def calculo_costes(volumen, bares_aire, bares_o2, bares_he, precio_aire=0.001, precio_o2=0.01, precio_he=0.09):
+def calculo_costes(volumen, bares_aire, bares_o2, bares_he, precio_aire=0.001, precio_o2=0.01, precio_he=0.07):
     litros_aire = volumen * bares_aire
     coste_aire = litros_aire * precio_aire
 
