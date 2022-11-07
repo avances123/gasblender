@@ -20,8 +20,8 @@ def aire(bares_iniciales=0, bares_finales=0, porcentaje_inicial_o2=21, porcentaj
     return resultado
 
 
-def pp():
-    pass
+def pp(bares_iniciales=0, bares_finales=0, porcentaje_inicial_o2=21, porcentaje_final_o2=21, porcentaje_inicial_he=0, porcentaje_final_he=0):
+    
 
 
 

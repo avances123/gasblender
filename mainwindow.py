@@ -2,7 +2,7 @@
 from pathlib import Path
 import sys
 
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication, QMainWindow, QLabel
 from PySide6.QtCore import QFile, QCoreApplication, Qt
 from PySide6.QtUiTools import QUiLoader
 
@@ -35,6 +35,14 @@ class MainWindow(QMainWindow):
     def inicializar_ui(self):
         # datos iniciales
         self.window.comboBox.addItems(ALGORITMOS.keys())
+
+        # Status bar
+        #self.window.statusbar.showMessage("Creado por Fabio Rueda")
+        label_status = QLabel()
+        label_status.setOpenExternalLinks(True)
+        #< font      face = verdana      size = 12        color = black >
+        label_status.setText("<a href='https://diving.fabio.xyz'>< font face = verdana size = 2 color = black >Creado por Avances123</a>")
+        self.window.statusbar.addPermanentWidget(label_status)
 
         # señales
         self.window.doubleSpinBoxvol.valueChanged.connect(self.calcular_plan)
@@ -78,7 +86,6 @@ class MainWindow(QMainWindow):
         precio_He = self.window.doubleSpinBox_2.value()
         precio_aire = self.window.doubleSpinBox_3.value()
 
-        print("Calculando plan para el algoritmo: " + nombre_algoritmo)
         algoritmo = ALGORITMOS[nombre_algoritmo]
         resultado = algoritmo(bares_iniciales=bares_iniciales, bares_finales=bares_finales, porcentaje_inicial_o2=porcentaje_inicial_o2,
                               porcentaje_final_o2=porcentaje_final_o2, porcentaje_inicial_he=porcentaje_inicial_he, porcentaje_final_he=porcentaje_final_he)
